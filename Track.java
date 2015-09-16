@@ -10,11 +10,11 @@ public class Track {
 		robot.addPart(ls1);
 		ls1.activate(true);
 
-		LightSensor ls2 = new LightSensor(SensorPort.S4);
+		LightSensor ls2 = new LightSensor(SensorPort.S2);
 		robot.addPart(ls2);
 		ls2.activate(true);
 
-		TouchSensor ts = new TouchSensor(SensorPort.S2);
+		TouchSensor ts = new TouchSensor(SensorPort.S3);
 		robot.addPart(ts);
 
 		Gear gear = new Gear();
@@ -25,23 +25,20 @@ public class Track {
 		
 		while (true) {
 			gear.forward();
-			int a = 1;
 			int v1 = ls1.getValue();
 			int v2 = ls2.getValue();
 			if (ts.isPressed()) {
 				System.out.println("Wall");
-				gear.left(310);
-				gear.forward(40);
-				gear.stop();
-				a = -a;
+				gear.left(180);
+				//gear.forward(70);
+				//gear.stop();
+		
 			}
-			if (v1 < 50) {
-				if (a == 1){
-					gear.right(5);
-				}
-				else{
-					gear.left(5);
-				}
+			if (v1 < 50){
+				gear.left(5);
+			}
+			if (v2 < 50){
+				gear.right(5);
 			}
 			
 		}
